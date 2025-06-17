@@ -7,7 +7,7 @@
 - [Introduction](#introduction)
     - [Table of Contents](#table-of-contents)
 - [Arrays](#arrays)
-    - [Declaring and Initializing Arrays](#declaring-and-initializing-Arrays]
+    - [Declaring and Initializing Arrays](#declaring-and-initializing-arrays)
     - [Accessing Array Elements](#accessing-array-elements)
     - [Array Length](#array-length)
 - [For-Each Loops](#for-each-loops)
@@ -167,12 +167,50 @@ for (int i = 0; i < numbers.length; i++) {
 ```
 
 ### >Exercise: Volunteer Sign-Ups
-1. You're organizing a beach clean-up and posted 8 slots for people to sign up on a volunteer website.
-2. Initialize something to store up to 8 volunteer names. `null` indicates no volunteer.
-3. Two people named `Robert` and `Penelope` have signed up! Fill in the first two slots for them.
-4. `Penelope` wants to go by `Penny`. Update her slot.
-5. You have a large group of students willing to help out as well! For each element in the array, check if it is empty and fill empty slots with `Student`.
-6. Print each item in your completed array.
+You're organizing a beach clean-up and posted 8 slots for people to sign up on a volunteer website.
+
+[`Volunteer.java`](Volunteer.java)
+1. Initialize something to store up to 8 volunteer names. `null` indicates no volunteer.
+2. Two people named `Robert` and `Penelope` have signed up! Fill in the first two slots for them.
+3. `Penelope` wants to go by `Penny`. Update her slot.
+4. You have a large group of students willing to help out as well! For each element in the array, check if it is empty and fill empty slots with `Student`.
+5. Print each item in your completed array.
+
+<details><summary>Solution Code</summary>
+
+```java
+public class Volunteer {
+    public static void main(String[] args) {
+        String[] signups = new String[8];
+        signups[0] = "Robert";
+        signups[1] = "Penelope";
+        signups[1] = "Penny";
+
+        for (int i = 0; i < signups.length; i++) {
+            if (signups[i] == null) {
+            signups[i] = "Student";
+            }
+        }
+
+        for (String signup : signups) {
+            System.out.println(signup);
+        }
+    }
+}
+```
+
+Output:
+```
+Robert
+Penny
+Student
+Student
+Student
+Student
+Student
+Student
+```
+</details>
 
 ## 2D Arrays
 A single value is like a point, 0-dimensional. An array is like a line, 1-dimensional. An array of arrays is like a grid, 2-dimensional.
@@ -231,9 +269,49 @@ Output:
 ```
 
 ### >Exercise: Checkerboard
+
+[`Checkerboard.java`](Checkerboard.java)
 1. Create an 8x8 `int` grid.
 2. Use for loops to initialize each element as the sum of the row and column indices.
 3. For each value in the grid, print out `#` for even values and `+` for odd values. Rows should be on their lines.
+
+<details><summary>Solution Code</summary>
+
+```java
+public class Checkerboard {
+    public static void main(String[] args) {
+        int[][] checkerboard = new int[8][8];
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                checkerboard[i][j] = i + j;
+            }
+        }
+
+        for (int[] array : checkerboard) {
+            for (int num : array) {
+                if (num % 2 == 0) {
+                    System.out.print("# ");
+                } else {
+                    System.out.print("+ ");
+                }
+            }
+            System.out.println();
+        }
+    }
+}
+```
+Output:
+```
+# + # + # + # + 
++ # + # + # + #
+# + # + # + # +
++ # + # + # + #
+# + # + # + # +
++ # + # + # + #
+# + # + # + # +
++ # + # + # + #
+```
+</details>
 
 ## `ArrayList`s
 **`ArrayList`s** are like *automatically-resizing arrays*, so elements can always be freely added and removed and we don't have to worry about the size. \
@@ -352,14 +430,50 @@ Output:
 ```
 
 ### >Exercise: Vending Machine
-1. You are a sentient vending machine. Somehow, you're more concerned with letting people know what snacks you have available to them than *how you are a sentient vending machine*.
-2. Create a list of all the snacks you have. Currently, that consists of `Goldfish`, `Fritos`, `Skittles`, `Snickers`, and `Chex Mix`.
-3. Print your list on one line to let everyone know what they can buy.
-4. All the `Snickers` have been bought.
-5. `Doritos` were just restocked, between the `Fritos` and `Skittles`.
-6. Print the updated list on one line, as well as its size on another.
-7. Because of your meticulously crafted lists, people discovered your sentience and called the police. The police promptly arrive on the scene and raid all your snacks. (That way, you can never take over the world.)
-8. Print your final list of snacks on one line.
+You are a sentient vending machine. Somehow, you're more concerned with letting people know what snacks you have available to them than *how you are a sentient vending machine*.
+
+[`VendingMachine.java`](VendingMachine.java)
+1. Create a list of all the snacks you have. Currently, that consists of `Goldfish`, `Fritos`, `Skittles`, `Snickers`, and `Chex Mix`.
+2. Print your list on one line to let everyone know what they can buy.
+3. All the `Snickers` have been bought.
+4. `Doritos` were just restocked, between the `Fritos` and `Skittles`.
+5. Print the updated list on one line, as well as its size on another.
+6. Because of your meticulously crafted lists, people discovered your sentience and called the police. The police promptly arrive on the scene and raid all your snacks. (That way, you can never take over the world.)
+7. Print your final list of snacks on one line.
+
+<details><summary>Solution Code</summary>
+
+```java
+import java.util.ArrayList;
+
+public class VendingMachine {
+    public static void main(String[] args) {
+        ArrayList<String> snacks = new ArrayList<String>();
+        snacks.add("Goldfish");
+        snacks.add("Fritos");
+        snacks.add("Skittles");
+        snacks.add("Snickers");
+        snacks.add("Chex Mix");
+        System.out.println("Snacks: " + snacks);
+
+        snacks.remove("Snickers");
+        snacks.add(2, "Doritos");
+        System.out.println("Updated snacks: " + snacks);
+        System.out.println("Total snacks: " + snacks.size());
+
+        snacks.clear();
+        System.out.println("No snacks left: " + snacks);
+    } 
+}
+```
+Output:
+```
+Snacks: [Goldfish, Fritos, Skittles, Snickers, Chex Mix]
+Updated snacks: [Goldfish, Fritos, Doritos, Skittles, Chex Mix]
+Total snacks: 5
+No snacks left: []
+```
+</details>
 
 ## `HashSet`s
 A **HashSet** is a collection type that where *every item is unique*, but *items are not ordered nor indexed*. \
@@ -427,14 +541,58 @@ I love Snakes!
 ```
 
 ### >Exercise: Astronomy
-1. You're looking through a telescope on a clear night, looking for the constellation Cassiopeia.
-2. Create a collection to hold all the *unique* constellations you've seen so far.
-3. As you look around, you see the constellations `Leo Minor`, `Lynx`, `Cepheus`, and `Ursa Minor`.
-4. You realize that the group of stars you recorded as `Cepheus` are actually part of two separate constellations, `Lacerta` and `Camelopardalis`. (Remove `Cepheus` and add the other two.)
-5. You just came across the constellation `Lynx`, but can't remember if you've already recorded it. Better add it again just in case.
-6. In your head, make a prediction of the collection's size. Then print out the actual size.
-7. Have you found `Cassiopeia` yet? Print whether or not it's in your collection.
-8. You've finally found `Cassiopeia`, just between `Lacerta` and `Camelopardalis`! Add it to your collection and print all the constellations you discovered tonight.
+You're looking through a telescope on a clear night, looking for the constellation Cassiopeia.
+
+[`Astronomy.java`](Astronomy.java)
+1. Create a collection to hold all the *unique* constellations you've seen so far.
+2. As you look around, you see the constellations `Leo Minor`, `Lynx`, `Cepheus`, and `Ursa Minor`.
+3. You realize that the group of stars you recorded as `Cepheus` are actually part of two separate constellations, `Lacerta` and `Camelopardalis`. (Remove `Cepheus` and add the other two.)
+4. You just came across the constellation `Lynx`, but can't remember if you've already recorded it. Better add it again just in case.
+5. In your head, make a prediction of the collection's size. Then print out the actual size.
+6. Have you found `Cassiopeia` yet? Print whether or not it's in your collection.
+7. You've finally found `Cassiopeia`, just between `Lacerta` and `Camelopardalis`! Add it to your collection and print all the constellations you discovered tonight.
+
+<details><summary>Solution Code</summary>
+
+```java
+import java.util.HashSet;
+
+public class Astronomy {
+    public static void main(String[] args) {
+        HashSet<String> constellations = new HashSet<String>();
+        constellations.add("Leo Minor");
+        constellations.add("Lynx");
+        constellations.add("Cepheus");
+        constellations.add("Ursa Minor");
+
+        constellations.remove("Cepheus");
+        constellations.add("Lacerta");
+        constellations.add("Camelopardalis");
+        constellations.add("Lynx");
+
+        System.out.println("I've found " + constellations.size() + " constellations!");
+        System.out.println("Have I found Cassiopeia? " + constellations.contains("Cassiopeia"));
+
+        constellations.add("Cassiopeia");
+        
+        for (String constellation : constellations) {
+            System.out.println("I found the constellation " + constellation);
+        }
+    } 
+}
+```
+Output:
+```
+I've found 5 constellations!
+Have I found Cassiopeia? false
+I found the constellation Lynx
+I found the constellation Cassiopeia
+I found the constellation Ursa Minor
+I found the constellation Lacerta
+I found the constellation Leo Minor
+I found the constellation Camelopardalis
+```
+</details>
 
 ## `HashMap`s
 A **`HashMap`** looks a little different compared to `ArrayList`s and `HashSets`. `HashMap`s store items in **(key, value)** pairs. Each key is associated with a value, and you can access that value using the corresponding key. \
@@ -528,17 +686,46 @@ Capital: Sacramento
 ```
 
 ### >Exercise: Locker Numbers
-1. You're a school administrator and need a way to keep track of students' locker numbers.
-2. Create a collection that allows you to access the name of the student using a given locker number.
-3. Recently, three students have been assigned new lockers. `George` got locker `11`, `Anna` got locker `5`, and `Harper` got locker `43`. Record this in your collection.
-4. `George` transferred to another school and is no longer using his locker.
-5. Print the number of lockers currently in use.
-6. Another student, `Mark`, transferred in and took locker `17`.
-7. The lock on locker `11` is missing. Print out the name of the student assigned to that locker.
-8. It's the end of the school year! Remove all student names and locker numbers from your collection.
+You're a school administrator and need a way to keep track of students' locker numbers.
+
+[`LockerNumbers.java`](LockerNumbers.java)
+1. Create a collection that allows you to access the name of the student using a given locker number.
+2. Recently, three students have been assigned new lockers. `George` got locker `11`, `Anna` got locker `5`, and `Harper` got locker `43`. Record this in your collection.
+3. `George` transferred to another school and is no longer using his locker.
+4. Print the number of lockers currently in use.
+5. Another student, `Mark`, transferred in and took locker `17`.
+6. The lock on locker `11` is missing. Print out the name of the student assigned to that locker.
+7. It's the end of the school year! Remove all student names and locker numbers from your collection.
 
 Bonus challenge: \
 `Anna` forgot which locker she got. Search for and find her locker number using her name.
+
+<details><summary>Solution Code</summary>
+
+```java
+import java.util.HashMap;
+
+public class LockerNumbers {
+    public static void main(String[] args) {
+        HashMap<Integer, String> lockers = new HashMap<Integer, String>();
+        lockers.put(11, "George");
+        lockers.put(5, "Anna");
+        lockers.put(43, "Harper");
+
+        lockers.remove(11);
+        System.out.println("Currently using " + lockers.size() + " lockers.");
+        lockers.put(17, "Mark");
+        System.out.println(lockers.get(11) + " is using locker 11.");
+        lockers.clear();
+    } 
+}
+```
+Output:
+```
+Currently using 2 lockers.
+null is using locker 11.
+```
+</details>
 
 ## Recap
 - Arrays hold a fixed number of elements of one type
