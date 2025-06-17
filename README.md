@@ -22,6 +22,7 @@
 - [`HashMap`s](#hashmaps)
     - [>Exercise: Locker Numbers](#exercise-locker-numbers)
 - [Recap](#recap)
+- [>>Project: Filesystem](#project-filesystem)
 
 [Feedback](#feedback) \
 [License](#license)
@@ -742,7 +743,137 @@ null is using locker 11.
 - `HashMap` has methods `put(key, value)`, `remove(key)`, `clear()`, `get(key)`, `size()`
 - `ArrayList`, `HashSet`, and `HashMap` are all classes in the `java.util` package
 
-## >>Project
+## >>Project: Filesystem
+Create a program that simulates a hierarchical filesystem in memory. Users can navigate, create, delete, and manage files and directories. \
+[`project/Filesystem.java`](project/Filesystem.java) (you will need to create more files)
+
+A filesystem has multiple components, structured in a hierarchy.
+- A **filesystem** is the overall entity. It contains multiple drives.
+- A **drive** typically represents a physical storage device's data. It contains a single root directory.
+- A **directory**, commonly known as a folder, contains multiple entries: files or directories.
+- A **file** contains actual data.
+- **Entry** is the general term for a file or directory.
+
+This filesystem has many commands to navigate and modify data. \
+The *current working directory* (CWD) is the 'selected' directory that acts as a workspace; other commands operate relative to this directory.
+
+A **path** is a description of the location and name of an entry. \
+If a path does not depend on the current working directory, it is an *absolute* path. \
+Absolute paths start with the drive letter, e.g. `C`, followed by a colon `:`, then directories separated by `/`, until the specified entry. \
+Example:
+```
+C:/Users/user/Documents/myfile.txt
+```
+(We will use forward slash `/` instead of the usual Windows backslash `\` as the separator.)
+
+*Relative* paths depend on the current working directory. \
+A dot `.` represents the path of the current working directory. Relative paths start with `./` so they start from the CWD. \
+In practice, you can omit the `./` and just start with the entry names; the `./` is assumed. \
+Examples:
+```
+./README.md
+Unit-8/project/Filesystem.java
+```
+A `..` represents the parent directory of the CWD.
+
+A useful method is `String`'s `.split(separator)` method. Example:
+```java
+String path = "Unit-8/project/Filesystem.java";
+String[] parts = path.split("/"); // {"Unit-8", "project", "Filesystem.java"}
+```
+You will need this for parsing paths and commands.
+
+Required features of the classes:
+- File
+    - Attributes:
+        - Name (e.g. `README.md`)
+        - Parent directory
+        - Data (one large `String`); defaults to empty string
+    - Operations (these might not be used in the program):
+        - Get path: path of parent + name
+        - Read (just gives the data)
+        - Write (replaces the data with new data)
+        - Append (concatenates new data to the end of existing data)
+- Directory
+    - Attributes:
+        - Name (e.g. `Unit-8`); a root directory has an empty zero-length name
+        - Parent directory
+        - Entries: arbitrary number of files and directories
+    - Operations:
+        - Get path: path of parent (if self has one) + name
+        - Add an entry
+        - Remove an entry by name
+        - Get an entry by name
+        - Give all entries
+- Drive
+    - Attributes:
+        - Letter (e.g. `C`, `D`): a single capital letter
+        - Root directory: one directory with no parent, that contains all of the data of the drive
+- Filesystem
+    - Attributes:
+        - Multiple drives (note that there can only be up to 26 because they are alphabetical)
+        - Current working directory
+    - Operations:
+        - Put the `main` method in this class
+        - Simulate a terminal: an input loop where the user can input commands and see output
+        - All commands
+        - Get an entry by absolute or relative path
+
+You'll need to create an interface or base class for a filesystem *entry* too.
+
+Commands are entered as a single line, after a `> `. \
+The first word is the command name. \
+If the command needs an input such as a path or name, it is the next thing in the command. \
+Example:
+```
+> rm file.txt
+```
+
+Required commands:
+- `touch path`: Create a new empty file in this directory, with the given path and name. (Does not fail if it already exists.) Fails if the parent directory of the path does not exist
+- `mkdir path`: Create a new empty directory in this one, with the given path and name (last part of path). Fails if it already exists or if the parent directory of the path does not exist
+- `rm path`: Remove a file or directory with a given path. Fails if it does not exist
+- `ls`: List entries of the current working directory. Add `/` to the end of directory names, to distinguish them from files
+- `cd path`: Change the current working directory. Fails if the given path does not exist or if the entry is a file instead of a directory
+- `pwd`: Print the current working directory path, absolute
+- `help`: List available commands (descriptions are not required)
+- `exit`: Exit the terminal and the entire program
+
+Optional commands:
+- `echo data`: Prints `data` as-is
+- `mv source dest`: Move a file or directory from the source path to the destination path (note: `dest` isn't the path of the parent directory, it is the actual entry path). Errors if source path does not exist or dest path's parent directory does not exist
+- `cp source dest`: Same as `mv`, but copies the entry instead; file contents are copied, and directory entries are recursively copied
+- `ls path`: Same as `ls` but applies to the given directory's path. Errors if it does not exist or is a file
+
+If an invalid command or input is given or the command fails, tell the user, and continue receiving commands.
+
+The initial state of the file system is that there are `C` and `D` drives with empty root directories, and the current working directory is the root directory of the `C` drive.
+
+Example terminal input/output (output format, especially error messages, may differ):
+```
+> pwd
+C:
+> touch file.txt
+> mkdir folder
+> ls
+file.txt
+folder/
+> cd folder
+> mkdir C:/folder/sub
+> pwd
+C:/folder
+> touch folder/file.txt
+Error: cannot touch 'C:/folder/folder/file.txt': no such file or directory
+> cd ..
+> rm folder
+> ls
+file.txt
+> mkdir ./file.txt
+Error: cannot create directory 'C:/file.txt': file or directory exists
+> rm D:/file.txt
+Error: cannot remove 'D:/': no such file or directory
+> exit 
+```
 
 ## Feedback
 Please provide feedback if you have any.
