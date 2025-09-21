@@ -876,7 +876,9 @@ Error: cannot remove 'D:/': no such file or directory
 ```
 
 ## Feedback
-Please provide feedback if you have any.
+Please provide feedback if you have any. \
+Also, please give an estimate of how much time you spent on this unit.
+
 <details><summary>Possible feedback points</summary>
 
 - Confusing explanations
