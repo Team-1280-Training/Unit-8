@@ -776,7 +776,7 @@ Immutable types:
 
 ## >>Project: Filesystem
 Create a program that simulates a hierarchical filesystem in memory. Users can navigate, create, delete, and manage files and directories. \
-[`project/Filesystem.java`](project/Filesystem.java) (you will need to create more files)
+[`filesystem/Filesystem.java`](filesystem/Filesystem.java) (you will need to create more files)
 
 A filesystem has multiple components, structured in a hierarchy.
 - A **filesystem** is the overall entity. It contains multiple drives.
@@ -803,14 +803,14 @@ In practice, you can omit the `./` and just start with the entry names; the `./`
 Examples:
 ```
 ./README.md
-Unit-8/project/Filesystem.java
+Unit-8/filesystem/Filesystem.java
 ```
 A `..` represents the parent directory of the CWD.
 
 A useful method is `String`'s `.split(separator)` method. Example:
 ```java
-String path = "Unit-8/project/Filesystem.java";
-String[] parts = path.split("/"); // {"Unit-8", "project", "Filesystem.java"}
+String path = "Unit-8/filesystem/Filesystem.java";
+String[] parts = path.split("/"); // {"Unit-8", "filesystem", "Filesystem.java"}
 ```
 You will need this for parsing paths and commands.
 
