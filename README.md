@@ -21,6 +21,7 @@
     - [>Exercise: Astronomy](#exercise-astronomy)
 - [`HashMap`s](#hashmaps)
     - [>Exercise: Locker Numbers](#exercise-locker-numbers)
+- [Mutability](#mutability)
 - [Recap](#recap)
 - [>>Project: Filesystem](#project-filesystem)
 
@@ -728,6 +729,35 @@ null is using locker 11.
 ```
 </details>
 
+## Mutability
+*Mutability* is whether an object's data or internal state can be changed, or *mutated*, after it is created. \
+If it can, the object is *mutable*, else it is *immutable*. \
+Some types better suit mutability, while others should be immutable. \
+There are fundamental differences between the two that should be understood.
+
+An example of a mutable type is an `ArrayList`: you can add and remove elements on the same instance, without
+needing to make a new copy. \
+In Java, most things are mutable by default. E.g. an object with settable fields. \
+An example of an immutable type is `String`: operations and methods never change the same `String` instance,
+and they instead return a new modified `String` instance. \
+Primitive types and their wrapper classes are all immutable.
+
+Mutable types:
+- Easy and fast to modify data
+- Convenient to use and extend
+- Most types are mutable
+- Can lead to bugs:
+    - When a stored instance gets modified unexpectedly in another place in the code
+    - Harder to track or enforce state and changes, since it is easy to modify
+- In general, avoid using mutable collections as elements in `HashSet` or as keys of `HashMap`
+
+Immutable types:
+- Much greater safety as they can't be modified
+- Easier reasoning and debugging, since they are very predictable
+- Suitable to be stored in collections and fields, since they can't be modified from somewhere else
+- Small data types such as primitives are often immutable
+- Sometimes harder and less efficient to modify and handle, since changing data requires making a new instance
+
 ## Recap
 - Arrays hold a fixed number of elements of one type
 - An array type is `TYPE[]`, and to create one use `new TYPE[SIZE]`
@@ -742,6 +772,7 @@ null is using locker 11.
 - `HashMap` is a collection of key-value pairs, where the key acts like an index for the value; generic with both types in `<>`
 - `HashMap` has methods `put(key, value)`, `remove(key)`, `clear()`, `get(key)`, `size()`
 - `ArrayList`, `HashSet`, and `HashMap` are all classes in the `java.util` package
+- Mutable objects provide convenient handling, but are more prone to bugs than immutable objects
 
 ## >>Project: Filesystem
 Create a program that simulates a hierarchical filesystem in memory. Users can navigate, create, delete, and manage files and directories. \
