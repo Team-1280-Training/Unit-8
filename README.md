@@ -169,9 +169,9 @@ for (int i = 0; i < numbers.length; i++) {
 ```
 
 ### >Exercise: Volunteer Sign-Ups
+[`Volunteer.java`](Volunteer.java) \
 You're organizing a beach clean-up and posted 8 slots for people to sign up on a volunteer website.
 
-[`Volunteer.java`](Volunteer.java)
 1. Initialize something to store up to 8 volunteer names. `null` indicates no volunteer.
 2. Two people named `Robert` and `Penelope` have signed up! Fill in the first two slots for them.
 3. `Penelope` wants to go by `Penny`. Update her slot.
@@ -271,7 +271,6 @@ Output:
 ```
 
 ### >Exercise: Checkerboard
-
 [`Checkerboard.java`](Checkerboard.java)
 1. Create an 8x8 `int` grid.
 2. Use for loops to initialize each element as the sum of the row and column indices.
@@ -432,9 +431,9 @@ Output:
 ```
 
 ### >Exercise: Vending Machine
+[`VendingMachine.java`](VendingMachine.java) \
 You are a sentient vending machine. Somehow, you're more concerned with letting people know what snacks you have available to them than *how you are a sentient vending machine*.
 
-[`VendingMachine.java`](VendingMachine.java)
 1. Create a list of all the snacks you have. Currently, that consists of `Goldfish`, `Fritos`, `Skittles`, `Snickers`, and `Chex Mix`.
 2. Print your list on one line to let everyone know what they can buy.
 3. All the `Snickers` have been bought.
@@ -543,9 +542,9 @@ I love Snakes!
 ```
 
 ### >Exercise: Astronomy
+[`Astronomy.java`](Astronomy.java) \
 You're looking through a telescope on a clear night, looking for the constellation Cassiopeia.
 
-[`Astronomy.java`](Astronomy.java)
 1. Create a collection to hold all the *unique* constellations you've seen so far.
 2. As you look around, you see the constellations `Leo Minor`, `Lynx`, `Cepheus`, and `Ursa Minor`.
 3. You realize that the group of stars you recorded as `Cepheus` are actually part of two separate constellations, `Lacerta` and `Camelopardalis`. (Remove `Cepheus` and add the other two.)
@@ -688,9 +687,9 @@ Capital: Sacramento
 ```
 
 ### >Exercise: Locker Numbers
+[`LockerNumbers.java`](LockerNumbers.java) \
 You're a school administrator and need a way to keep track of students' locker numbers.
 
-[`LockerNumbers.java`](LockerNumbers.java)
 1. Create a collection that allows you to access the name of the student using a given locker number.
 2. Recently, three students have been assigned new lockers. `George` got locker `11`, `Anna` got locker `5`, and `Harper` got locker `43`. Record this in your collection.
 3. `George` transferred to another school and is no longer using his locker.
